@@ -17,16 +17,10 @@ public class DungeonGenerator : MonoBehaviour
     public Vector2 offset;
 
     [SerializeField] private int maxRooms;
+    [SerializeField] private GameObject dungeon;
 
     List<Cell> board;
-
-// Start is called before the first frame update
-    void Start()
-    {
-        MazeGenerator();
-    }
-
-    [Button]
+    
     void GenerateDungeon()
     {
         for (int i = 0; i < size.x; i++)
@@ -37,7 +31,7 @@ public class DungeonGenerator : MonoBehaviour
                 if (currentCell.visited)//only instantiate when the area has been visited so the whole board doesnt fill up with rooms
                 {
                     var newRoom =
-                        Instantiate(room, new Vector3(i * offset.x, 0, -j * offset.y), Quaternion.identity, transform)
+                        Instantiate(room, new Vector3(i * offset.x, 0, -j * offset.y), Quaternion.identity, dungeon.transform)
                             .GetComponent<RoomBehaviour>();
                     newRoom.UpdateRoom(currentCell.status);
                     newRoom.name += " " + i + "-" + j;
@@ -46,6 +40,7 @@ public class DungeonGenerator : MonoBehaviour
         }
     }
 
+    [Button] //make it run when you want through an external asset
     void MazeGenerator()
     {
         board = new List<Cell>();
