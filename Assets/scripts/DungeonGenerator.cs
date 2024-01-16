@@ -29,10 +29,10 @@ public class DungeonGenerator : MonoBehaviour
     {
         for (int i = 0; i < size.x; i++)
         {
-            for (int j = 0; i < size.y; j++)
+            for (int j = 0; j < size.y; j++)
             {
                 var newRoom =
-                    Instantiate(room, new Vector3(i * offset.x, 0, - j * offset.y), Quaternion.identity, transform)
+                    Instantiate(room, new Vector3(i * offset.x, 0, -j * offset.y), Quaternion.identity, transform)
                         .GetComponent<RoomBehaviour>();
                 newRoom.UpdateRoom(board[Mathf.FloorToInt(i + j * size.x)].status);
                 newRoom.name += " " + i + "-" + j;
@@ -45,7 +45,7 @@ public class DungeonGenerator : MonoBehaviour
         board = new List<Cell>();
         for (int i = 0; i < size.x; i++)
         {
-            for (int j = 0; i < size.y; j++)
+            for (int j = 0; j < size.y; j++)
             {
                 board.Add(new Cell());
             }
@@ -56,7 +56,7 @@ public class DungeonGenerator : MonoBehaviour
 
         int k = 0;
 
-        while (k < 200) //to make sure the code doesnt run indefinitely, can be made bigger but for now is a high enough number of cells
+        while (k < 2000) //to make sure the code doesnt run indefinitely, can be made bigger but for now is a high enough number of cells
         {
             k++;
 
