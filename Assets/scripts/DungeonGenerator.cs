@@ -16,30 +16,31 @@ public class DungeonGenerator : MonoBehaviour
     public GameObject room;
     public Vector2 offset;
 
+    [SerializeField] private int maxRooms;
+    [SerializeField] private GameObject dungeon;
+
     List<Cell> board;
-
-// Start is called before the first frame update
-    void Start()
-    {
-        MazeGenerator();
-    }
-
-    [Button]
+    
     void GenerateDungeon()
     {
         for (int i = 0; i < size.x; i++)
         {
             for (int j = 0; j < size.y; j++)
             {
-                var newRoom =
-                    Instantiate(room, new Vector3(i * offset.x, 0, -j * offset.y), Quaternion.identity, transform)
-                        .GetComponent<RoomBehaviour>();
-                newRoom.UpdateRoom(board[Mathf.FloorToInt(i + j * size.x)].status);
-                newRoom.name += " " + i + "-" + j;
+                Cell currentCell = board[Mathf.FloorToInt(i + j * size.x)];
+                if (currentCell.visited)//only instantiate when the area has been visited so the whole board doesnt fill up with rooms
+                {
+                    var newRoom =
+                        Instantiate(room, new Vector3(i * offset.x, 0, -j * offset.y), Quaternion.identity, dungeon.transform)
+                            .GetComponent<RoomBehaviour>();
+                    newRoom.UpdateRoom(currentCell.status);
+                    newRoom.name += " " + i + "-" + j;
+                }
             }
         }
     }
 
+    [Button] //make it run when you want through an external asset
     void MazeGenerator()
     {
         board = new List<Cell>();
@@ -54,13 +55,19 @@ public class DungeonGenerator : MonoBehaviour
         int currentCell = startPos;
         Stack<int> path = new Stack<int>();
 
-        int k = 0;
 
-        while (k < 2000) //to make sure the code doesnt run indefinitely, can be made bigger but for now is a high enough number of cells
+        int k = 0;
+        while
+            (k < maxRooms) //higher number == more filled up grid
         {
             k++;
 
             board[currentCell].visited = true;
+
+            if (currentCell == board.Count - 1) //stop the search when you are at the last cell
+            {
+                break;
+            }
 
             List<int> neighbours = CheckNeighbors(currentCell);
 
