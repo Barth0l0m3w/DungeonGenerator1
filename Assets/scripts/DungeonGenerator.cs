@@ -6,6 +6,7 @@ using UnityEngine.Serialization;
 
 public class DungeonGenerator : MonoBehaviour
 {
+    
     public class Cell
     {
         public bool visited = false;
@@ -19,7 +20,8 @@ public class DungeonGenerator : MonoBehaviour
 
     [SerializeField] private int maxRooms;
     [SerializeField] private GameObject dungeon;
-
+    [SerializeField] NavMeshBuild navBuild;
+    
     List<Cell> board;
     
     void GenerateDungeon()
@@ -40,6 +42,8 @@ public class DungeonGenerator : MonoBehaviour
                 }
             }
         }
+        
+        navBuild.BuildNavigation();
     }
 
     [Button] //make it run when you want through an external asset
