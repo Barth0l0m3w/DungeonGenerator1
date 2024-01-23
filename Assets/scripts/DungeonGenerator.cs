@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using NaughtyAttributes;
+using UnityEngine.Serialization;
 
 public class DungeonGenerator : MonoBehaviour
 {
+    
     public class Cell
     {
         public bool visited = false;
@@ -13,12 +15,13 @@ public class DungeonGenerator : MonoBehaviour
 
     public Vector2 size;
     public int startPos;
-    public GameObject room;
+    [FormerlySerializedAs("room")] public GameObject[] rooms;
     public Vector2 offset;
 
     [SerializeField] private int maxRooms;
     [SerializeField] private GameObject dungeon;
-
+    [SerializeField] NavMeshBuild navBuild;
+    
     List<Cell> board;
     
     void GenerateDungeon()
@@ -30,14 +33,17 @@ public class DungeonGenerator : MonoBehaviour
                 Cell currentCell = board[Mathf.FloorToInt(i + j * size.x)];
                 if (currentCell.visited)//only instantiate when the area has been visited so the whole board doesnt fill up with rooms
                 {
+                    int randomRoom = Random.Range(0, rooms.Length);
                     var newRoom =
-                        Instantiate(room, new Vector3(i * offset.x, 0, -j * offset.y), Quaternion.identity, dungeon.transform)
+                        Instantiate(rooms[randomRoom], new Vector3(i * offset.x, 0, -j * offset.y), Quaternion.identity, dungeon.transform)
                             .GetComponent<RoomBehaviour>();
                     newRoom.UpdateRoom(currentCell.status);
                     newRoom.name += " " + i + "-" + j;
                 }
             }
         }
+        
+        navBuild.BuildNavigation();
     }
 
     [Button] //make it run when you want through an external asset
