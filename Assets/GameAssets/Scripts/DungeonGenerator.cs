@@ -4,7 +4,6 @@ using NaughtyAttributes;
 
 public class DungeonGenerator : MonoBehaviour
 {
-    
     private class Cell
     {
         public bool Visited;
@@ -23,6 +22,21 @@ public class DungeonGenerator : MonoBehaviour
     [SerializeField] private NavMeshBuild _navBuild;
     
     private List<Cell> _board;
+
+    [Button]
+    private void CreateNewDungeon()
+    {
+        ClearOldDungeon();
+        Generator();
+    }
+    
+    private void ClearOldDungeon()
+    {
+        for (int i = _dungeon.transform.childCount - 1; i >= 0; i--)
+        {
+            DestroyImmediate(_dungeon.transform.GetChild(0).gameObject);
+        }
+    }
     
     void GenerateDungeon()
     {
@@ -43,11 +57,10 @@ public class DungeonGenerator : MonoBehaviour
             }
         }
         
-        _navBuild.BuildNavigation();
+        //_navBuild.BuildNavigation();
     }
-
-    [Button] //make it run when you want through an external asset
-    void MazeGenerator()
+    
+    void Generator()
     {
         _board = new List<Cell>();
         for (int i = 0; i < _size.x; i++)
@@ -59,13 +72,13 @@ public class DungeonGenerator : MonoBehaviour
         }
 
         int currentCell = _startPos;
-        Stack<int> path = new Stack<int>();
+        Stack<int> path = new();
         
-        int k = 0;
+        int rooms = 0;
         while
-            (k < _maxRooms) //higher number == more filled up grid
+            (rooms < _maxRooms) //higher number == more filled up grid
         {
-            k++;
+            rooms++;
 
             _board[currentCell].Visited = true;
 
@@ -82,10 +95,7 @@ public class DungeonGenerator : MonoBehaviour
                 {
                     break;
                 }
-                else
-                {
-                    currentCell = path.Pop();
-                }
+                currentCell = path.Pop();
             }
             else
             {
