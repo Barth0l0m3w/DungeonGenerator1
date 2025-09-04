@@ -9,17 +9,23 @@ public class DungeonGenerator : MonoBehaviour
         public bool Visited;
         public bool[] Status = new bool[4];
     }
-
+    
+    [Header("Dungeon Variables")]
+    [HorizontalLine(color: EColor.Red)]
     [SerializeField] private Vector2 _size;
     [SerializeField] private int _startPos;
     [SerializeField] private Vector2 _offset;
     [SerializeField] private int _maxRooms;
     
+    [Header("Room Variants")]
+    [HorizontalLine(color: EColor.Red)]
     [SerializeField] private GameObject[] _roomPrefabs;
     
+    [Header("Necessary Links")]
+    [HorizontalLine(color: EColor.Red)]
     [Tooltip("in what gameObject to spawn the dungeon rooms")]
     [SerializeField] private GameObject _dungeon;
-    [SerializeField] private NavMeshBuild _navBuild;
+    //[SerializeField] private NavMeshBuild _navBuild;
     
     private List<Cell> _board;
 
