@@ -36,6 +36,7 @@ public class DungeonGenerator : MonoBehaviour
         Generator();
     }
     
+    [Button]
     private void ClearOldDungeon()
     {
         for (int i = _dungeon.transform.childCount - 1; i >= 0; i--)
