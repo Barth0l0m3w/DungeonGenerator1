@@ -25,7 +25,7 @@ public class DungeonGenerator : MonoBehaviour
     [HorizontalLine(color: EColor.Red)]
     [Tooltip("in what gameObject to spawn the dungeon rooms")]
     [SerializeField] private GameObject _dungeon;
-    //[SerializeField] private NavMeshBuild _navBuild;
+    [SerializeField] private NavMeshBuild _navBuild;
     
     private List<Cell> _board;
 
@@ -34,6 +34,7 @@ public class DungeonGenerator : MonoBehaviour
     {
         ClearOldDungeon();
         Generator();
+        _navBuild.BuildNavigation();
     }
     
     [Button]
@@ -43,6 +44,8 @@ public class DungeonGenerator : MonoBehaviour
         {
             DestroyImmediate(_dungeon.transform.GetChild(0).gameObject);
         }
+
+        _navBuild.ClearOldNav();
     }
     
     void GenerateDungeon()
@@ -64,7 +67,7 @@ public class DungeonGenerator : MonoBehaviour
             }
         }
         
-        //_navBuild.BuildNavigation();
+        _navBuild.BuildNavigation();
     }
     
     void Generator()

@@ -16,4 +16,9 @@ public class NavMeshBuild : MonoBehaviour
         navService.RemoveData();//clear the old bake
         navService.BuildNavMesh();//make a new bake according to the new dungeon
     }
+    
+    public void ClearOldNav()
+    {
+        navService.RemoveData();
+    }
 }
