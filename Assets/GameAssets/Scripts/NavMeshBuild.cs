@@ -1,19 +1,23 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using Unity.AI.Navigation;
-using Unity.AI;
 using NaughtyAttributes;
-using UnityEngine.Serialization;
+using Unity.AI.Navigation;
+using UnityEngine;
 
-public class NavMeshBuild : MonoBehaviour
+namespace GameAssets.Scripts
 {
-    [FormerlySerializedAs("navSurvice")] public NavMeshSurface navService;
-    
-    [Button]
-    public void BuildNavigation()
+    public class NavMeshBuild : MonoBehaviour
     {
-        navService.RemoveData();//clear the old bake
-        navService.BuildNavMesh();//make a new bake according to the new dungeon
+        [SerializeField] private NavMeshSurface _navSurface;
+    
+        [Button]
+        public void BuildNavigation()
+        {
+            _navSurface.RemoveData();//clear the old bake
+            _navSurface.BuildNavMesh();//make a new bake according to the new dungeon
+        }
+    
+        public void ClearOldNav()
+        {
+            _navSurface.RemoveData();
+        }
     }
 }
