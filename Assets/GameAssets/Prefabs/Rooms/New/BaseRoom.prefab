@@ -228,12 +228,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f8208d74c89cc946ab6645137246afe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walls:
+  _walls:
   - {fileID: 4896122561157062195}
   - {fileID: 3305389738542115211}
   - {fileID: 198957323417296868}
   - {fileID: 8507839605808757342}
-  doors:
+  _doors:
   - {fileID: 3698510163495148948}
   - {fileID: 6386823000496623248}
   - {fileID: 1336985534630814702}

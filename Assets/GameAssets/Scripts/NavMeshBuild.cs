@@ -1,20 +1,23 @@
-using UnityEngine;
-using Unity.AI.Navigation;
 using NaughtyAttributes;
+using Unity.AI.Navigation;
+using UnityEngine;
 
-public class NavMeshBuild : MonoBehaviour
+namespace GameAssets.Scripts
 {
-    public NavMeshSurface navService;
-    
-    [Button]
-    public void BuildNavigation()
+    public class NavMeshBuild : MonoBehaviour
     {
-        navService.RemoveData();//clear the old bake
-        navService.BuildNavMesh();//make a new bake according to the new dungeon
-    }
+        [SerializeField] private NavMeshSurface _navSurface;
     
-    public void ClearOldNav()
-    {
-        navService.RemoveData();
+        [Button]
+        public void BuildNavigation()
+        {
+            _navSurface.RemoveData();//clear the old bake
+            _navSurface.BuildNavMesh();//make a new bake according to the new dungeon
+        }
+    
+        public void ClearOldNav()
+        {
+            _navSurface.RemoveData();
+        }
     }
 }

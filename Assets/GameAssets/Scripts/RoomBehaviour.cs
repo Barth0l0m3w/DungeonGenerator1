@@ -1,21 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
-public class RoomBehaviour : MonoBehaviour
+namespace GameAssets.Scripts
 {
-
-    public GameObject[] walls; // 0-up 1-down 2-right 3-left
-    public GameObject[] doors;
-
-
-    public void UpdateRoom(bool[] status)
+    public class RoomBehaviour : MonoBehaviour
     {
-        for (int i = 0; i < status.Length; i++)
+        [SerializeField] private GameObject[] _walls; // 0-up 1-down 2-right 3-left
+        [SerializeField] private GameObject[] _doors;
+    
+        public void UpdateRoom(bool[] status)
         {
-            doors[i].SetActive(status[i]);
-            walls[i].SetActive(!status[i]);
+            for (int i = 0; i < status.Length; i++)
+            {
+                _doors[i].SetActive(status[i]);
+                _walls[i].SetActive(!status[i]);
+            }
         }
     }
 }
