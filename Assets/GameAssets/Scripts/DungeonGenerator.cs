@@ -66,8 +66,6 @@ public class DungeonGenerator : MonoBehaviour
                 }
             }
         }
-        
-        _navBuild.BuildNavigation();
     }
     
     void Generator()

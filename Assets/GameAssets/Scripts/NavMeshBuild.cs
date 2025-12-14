@@ -1,14 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Unity.AI.Navigation;
-using Unity.AI;
 using NaughtyAttributes;
-using UnityEngine.Serialization;
 
 public class NavMeshBuild : MonoBehaviour
 {
-    [FormerlySerializedAs("navSurvice")] public NavMeshSurface navService;
+    public NavMeshSurface navService;
     
     [Button]
     public void BuildNavigation()
