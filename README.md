@@ -1,12 +1,12 @@
 ## DungeonGenerator
 
-# Itteration1:
+# Iteration1:
 In this unity project, you will find a dungeon generator made with prefab rooms (as many as needed). The size of the grid/amaunt of rooms can be altered in the inspector and will be saved in the folder from the hierarchy of your selection. this way you will be able to save, make, and compare as many as you wish. 
 
 endresult:
 ![](Assets/GitPageAssets/gif/DungeonGenerator.gif)
 
-# Itteration2:
+# Iteration2:
 After taking a look at this project 2 years later, i quickly spotted mayor points for improvement. 
 So i have spent some time to implement: 
 - better tooling
